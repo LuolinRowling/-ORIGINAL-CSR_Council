@@ -3,7 +3,7 @@
 ## Apache-2.0 License
 ## Author: TinBacon from BUPT
 ## Initialize on 6 Feb 2017
-## Update on
+## Update on 7 Feb 2017
 ####################################################################################
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -99,7 +99,7 @@ class DBEngine(object):
     ####################################################################################
 
     # Add Person
-    def addPerson(self, id, grd, name, sex, phn, qq, mail, home, assc, deg, uni, coll, edu_year, dur, org=null, work_year=null):
+    def addPerson(self, id, grd, name, sex, phn, qq, mail, home, assc, deg, uni, coll, edu_year, dur, org=None, work_year=None):
 
         person = DBPerson(id, grd, name, sex, phn, qq, mail, home, assc)
         self.session.add(person)
@@ -107,7 +107,7 @@ class DBEngine(object):
 
         self.addEdu(id, deg, uni, coll, edu_year, dur)
 
-        if not org == null:
+        if not org == None:
             self.addWork(id, org, work_year)
 
     # Delete Person
@@ -120,26 +120,26 @@ class DBEngine(object):
         self.deleteWork(id)
 
     # Edit Person
-    def editPerson(self, id, grd=null, name=null, sex=null, phn=null, qq=null, mail=null, home=null, assc=null,
-                   deg=null, uni=null, coll=null, edu_year=null, dur=null, org=null, work_year=null):
+    def editPerson(self, id, grd=None, name=None, sex=None, phn=None, qq=None, mail=None, home=None, assc=None,
+                   deg=None, uni=None, coll=None, edu_year=None, dur=None, org=None, work_year=None):
 
         person = self.session.query(DBPerson).filter(DBPerson.id == id)
 
-        if not grd == null:
+        if not grd == None:
             person.update({'graduation':grd})
-        if not name == null:
+        if not name == None:
             person.update({'name':name})
-        if not sex == null:
+        if not sex == None:
             person.update({'sex':sex})
-        if not phn == null:
+        if not phn == None:
             person.update({'phone':phn})
-        if not qq == null:
+        if not qq == None:
             person.update({'qq':qq})
-        if not mail == null:
+        if not mail == None:
             person.update({'mail':mail})
-        if not home == null:
+        if not home == None:
             person.update({'home':home})
-        if not assc == null:
+        if not assc == None:
             person.update({'association':assc})
 
         self.session.commit()
@@ -148,27 +148,27 @@ class DBEngine(object):
         self.editWork(id, org, work_year)
 
     # Search Person
-    def queryPerson(self, id=null, grd=null, name=null, sex=null, phn=null, qq=null, mail=null, home=null, assc=null):
+    def queryPerson(self, id=None, grd=None, name=None, sex=None, phn=None, qq=None, mail=None, home=None, assc=None):
 
         person = self.session.query(DBPerson)
 
-        if not id == null:
+        if not id == None:
             person = person.filter(DBPerson.id == id)
-        if not grd == null:
+        if not grd == None:
             person = person.filter(DBPerson.graduation == grd)
-        if not name == null:
+        if not name == None:
             person = person.filter(DBPerson.name == name)
-        if not sex == null:
+        if not sex == None:
             person = person.filter(DBPerson.sex == sex)
-        if not phn == null:
+        if not phn == None:
             person = person.filter(DBPerson.phone == phn)
-        if not qq == null:
+        if not qq == None:
             person = person.filter(DBPerson.qq == qq)
-        if not mail == null:
+        if not mail == None:
             person = person.filter(DBPerson.mail == mail)
-        if not home == null:
+        if not home == None:
             person = person.filter(DBPerson.home == home)
-        if not assc == null:
+        if not assc == None:
             person = person.filter(DBPerson.association == assc)
 
         return person
@@ -191,39 +191,39 @@ class DBEngine(object):
         self.session.commit()
 
     # Edit Education Information of Person
-    def editEdu(self, id, deg=null, uni=null, coll=null, year=null, dur=null):
+    def editEdu(self, id, deg=None, uni=None, coll=None, year=None, dur=None):
 
         edu = self.session.query(DBEducation).filter(DBEducation.id == id)
 
-        if not deg == null:
+        if not deg == None:
             edu.update({'degree':deg})
-        if not uni == null:
+        if not uni == None:
             edu.update({'university':uni})
-        if not coll == null:
+        if not coll == None:
             edu.update({'college':coll})
-        if not year == null:
+        if not year == None:
             edu.update({'year':year})
-        if not dur == null:
+        if not dur == None:
             edu.update({'duration':dur})
 
         self.session.commit()
 
     # Search Education Information of Person
-    def queryEdu(self,id=null, deg=null, uni=null, coll=null, year=null, dur=null):
+    def queryEdu(self,id=None, deg=None, uni=None, coll=None, year=None, dur=None):
 
         edu = self.session.query(DBEducation)
 
-        if not id == null:
+        if not id == None:
             edu = edu.filter(DBEducation.id == id)
-        if not deg == null:
+        if not deg == None:
             edu = edu.filter(DBEducation.degree == deg)
-        if not uni == null:
+        if not uni == None:
             edu = edu.filter(DBEducation.university == uni)
-        if not coll == null:
+        if not coll == None:
             edu = edu.filter(DBEducation.college == coll)
-        if not year == null:
+        if not year == None:
             edu = edu.filter(DBEducation.year == year)
-        if not dur == null:
+        if not dur == None:
             edu = edu.filter(DBEducation.duration == dur)
 
         return edu
@@ -246,27 +246,27 @@ class DBEngine(object):
         self.session.commit()
 
     # Edit Work Information of Person
-    def editWork(self, id, org=null, year=null):
+    def editWork(self, id, org=None, year=None):
 
         work = self.session.query(DBWork).filter(DBWork.id == id)
 
-        if not org == null:
+        if not org == None:
             work.update({'orgnization':org})
-        if not year == null:
+        if not year == None:
             work.update({'year':year})
 
         self.session.commit()
 
     # Search Work Information of Person
-    def queryWork(self, id=null, org=null, year=year):
+    def queryWork(self, id=None, org=None, year=year):
 
         work = self.session.query(DBWork)
 
-        if not id == null:
+        if not id == None:
             work = work.filter(DBWork.id == id)
-        if not org == null:
+        if not org == None:
             work = work.filter(DBWork.orgnization == org)
-        if not year == null:
+        if not year == None:
             work = work.filter(DBWork.year == year)
 
         return work
